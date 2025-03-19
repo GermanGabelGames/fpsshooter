@@ -14,17 +14,19 @@ var _rotation_input : float
 var _tilt_input : float
 var _player_rotation : Vector3
 var _camera_rotation : Vector3
+var _is_crouching : bool = false
 
 func _input(event):
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
+	if event.is_action_pressed("crouch"):
+		toggle_crouch()
 
 func _unhandled_input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
 	if _mouse_input:
 		_rotation_input = -event.relative.x
 		_tilt_input = -event.relative.y
-		print(Vector2(_rotation_input,_tilt_input))
 
 func _update_camera(delta):
 	_mouse_rotation.x += _tilt_input * delta
@@ -68,3 +70,10 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+func toggle_crouch():
+	if _is_crouching == true:
+		print("ja")
+	elif _is_crouching == false:
+		print("nein")
+	_is_crouching = !_is_crouching

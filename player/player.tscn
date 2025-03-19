@@ -23,3 +23,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="CammeraControler/Camera3D"]
 update_mode = 1
+blend_distance = 2.22
+max_distance = 7.6
+size = Vector3(100, 100, 100)
