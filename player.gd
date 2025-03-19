@@ -20,6 +20,16 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
+	$Camera3D.rotate_y(twist_input)
+	$Camera3D.rotate_x(pitch_imput)
+	$Camera3D.rotation.x = clamp(
+		$Camera3D.rotation.x,
+		-0.5,
+		0.5
+	)
+	twist_input = 0.0
+	pitch_imput = 0.0
+		
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
