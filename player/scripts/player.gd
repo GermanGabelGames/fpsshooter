@@ -1,12 +1,16 @@
 extends CharacterBody3D
 
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-
+@export var SPEED : float = 5.0
+@export var TOGGLE_CROUCH : bool = true
+@export var JUMP_VELOCITY : float = 3.0
+@export_range(5, 10, 0.1) var CROUCH_SPEED : float = 7.0
+@export var MOUSE_SENSITIVITY : float = 0.5
 @export var TILT_LOWER_LIMIT := deg_to_rad(-90.0)
 @export var TILT_UPPER_LIMIT := deg_to_rad(90.0)
 @export var CAMERA_CONTROLLER : Camera3D
+@export var ANIMATIONPLAYER : AnimationPlayer
+@export var CROUCH_SHAPECAST : Node3D
 
 var _mouse_input : bool = false
 var _mouse_rotation : Vector3
@@ -19,8 +23,15 @@ var _is_crouching : bool = false
 func _input(event):
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
-	if event.is_action_pressed("crouch"):
+	if event.is_action_pressed("crouch") and TOGGLE_CROUCH == true:
 		toggle_crouch()
+	if event.is_action_pressed("crouch") and _is_crouching == false and TOGGLE_CROUCH == false:
+		crouching(true)
+	if event.is_action_released("crouch") and TOGGLE_CROUCH == false:
+		if CROUCH_SHAPECAST.is_colliding() == false:
+			crouching(false)
+		elif  CROUCH_SHAPECAST.is_colliding() == true:
+			uncrouch_check()
 
 func _unhandled_input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
@@ -46,6 +57,8 @@ func _update_camera(delta):
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	CROUCH_SHAPECAST.add_exception($".")
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -72,8 +85,27 @@ func _physics_process(delta):
 	move_and_slide()
 
 func toggle_crouch():
-	if _is_crouching == true:
-		print("ja")
+	if _is_crouching == true and CROUCH_SHAPECAST.is_colliding() == false:
+		crouching(false)
 	elif _is_crouching == false:
-		print("nein")
-	_is_crouching = !_is_crouching
+		crouching(true)
+
+func uncrouch_check():
+	if CROUCH_SHAPECAST.is_colliding() == false:
+		crouching(false)
+	if CROUCH_SHAPECAST.is_colliding() == true:
+		await get_tree().create_timer(0.1).timeout
+		uncrouch_check()
+
+func crouching(state : bool):
+	match state:
+		true:
+			SPEED = 2.0
+			ANIMATIONPLAYER.play("crouch", 0, CROUCH_SPEED)
+		false:
+			SPEED = 5.0
+			ANIMATIONPLAYER.play("crouch", 0, -CROUCH_SPEED)
+
+func _on_animation_player_animation_started(anim_name):
+	if anim_name == "crouch":
+		_is_crouching = !_is_crouching
