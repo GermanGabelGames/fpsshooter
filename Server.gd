@@ -8,14 +8,21 @@ func _ready():
 	ConnectToServer()
 
 func ConnectToServer():
-	network.create_client(ip, port)
-	multiplayer.set_multiplayer_peer(network)
+	print("Versuche, eine Verbindung zu ", ip, " auf Port ", port, " herzustellen.")
+	var result = network.create_client(ip, port)
 	
-	multiplayer.connect("connection_failed", Callable(self, "_OnConnectionFailed"))
-	multiplayer.connect("connection_succeeded", Callable(self, "_OnConnectionSucceeded"))
+	if result == OK:
+		print("Verbindung erfolgreich gestartet!")
+		multiplayer.set_multiplayer_peer(network)
+		
+		# Verbindungssignale
+		network.connect("peer_connected", Callable(self, "_OnConnectionSucceeded"))
+		network.connect("peer_disconnected", Callable(self, "_OnConnectionFailed"))
+	else:
+		print("Fehler beim Starten der Verbindung: ", result)
 
 func _OnConnectionFailed():
-	print("Failed to connect")
+	print("Verbindung fehlgeschlagen oder Verbindung wurde getrennt.")
 
 func _OnConnectionSucceeded():
-	print("Connected!")
+	print("Erfolgreich verbunden!")
