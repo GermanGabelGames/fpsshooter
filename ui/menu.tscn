@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://b1o7r8dxdkr8l"]
 
-[ext_resource type="Script" uid="uid://ctmrsclmvv5x0" path="res://ui/code/button.gd" id="1_bwjgb"]
-[ext_resource type="Script" uid="uid://bavcbjmfixn3y" path="res://ui/code/gamer_tag.gd" id="2_udkah"]
+[ext_resource type="Script" uid="uid://ctmrsclmvv5x0" path="res://ui/scripts/button.gd" id="1_bwjgb"]
+[ext_resource type="Script" uid="uid://bavcbjmfixn3y" path="res://ui/scripts/gamer_tag.gd" id="2_udkah"]
 [ext_resource type="LabelSettings" uid="uid://cdke14yekaicf" path="res://ui/font.tres" id="3_4c782"]
 [ext_resource type="Texture2D" uid="uid://6vcv7f3852qj" path="res://textures/ui/settings.png" id="4_2ot4n"]
-[ext_resource type="Script" uid="uid://bkhrqa6vxraet" path="res://ui/code/settings.gd" id="5_fcydj"]
+[ext_resource type="Script" uid="uid://bkhrqa6vxraet" path="res://ui/scripts/settings.gd" id="5_fcydj"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3

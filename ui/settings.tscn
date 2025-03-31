@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0h40pmg4jxgy"]
+[gd_scene load_steps=6 format=3 uid="uid://c0h40pmg4jxgy"]
 
 [ext_resource type="Script" uid="uid://dwdojiy4t0g8e" path="res://player/scripts/reticle.gd" id="1_7kwmf"]
 [ext_resource type="Texture2D" uid="uid://5dibgh4ibf5e" path="res://textures/ui/back.png" id="2_feasd"]
-[ext_resource type="Script" uid="uid://wwge21b5ylwf" path="res://ui/code/croshair_color_picker.gd" id="2_neoxp"]
-[ext_resource type="Script" uid="uid://cbvlfsqulegvs" path="res://ui/code/back.gd" id="3_neoxp"]
+[ext_resource type="Script" uid="uid://wwge21b5ylwf" path="res://ui/scripts/croshair_color_picker.gd" id="2_neoxp"]
+[ext_resource type="Script" uid="uid://cbvlfsqulegvs" path="res://ui/scripts/back.gd" id="3_neoxp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_neoxp"]
+font_size = 40
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -22,37 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.35885, 0.374682, 0.370832, 1)
 
-[node name="Reticle" type="CenterContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_7kwmf")
-
-[node name="ColorPickerButton" type="ColorPickerButton" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = 33.0
-offset_right = 100.0
-offset_bottom = 233.0
-grow_horizontal = 2
-grow_vertical = 2
-flat = true
-color = Color(1, 1, 1, 1)
-script = ExtResource("2_neoxp")
-
-[node name="settings" type="Button" parent="."]
+[node name="back" type="Button" parent="."]
 layout_mode = 1
 offset_left = 27.0
 offset_top = 27.0
@@ -63,5 +36,116 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("3_neoxp")
 
-[connection signal="color_changed" from="ColorPickerButton" to="Reticle" method="_on_color_picker_button_color_changed"]
-[connection signal="pressed" from="settings" to="settings" method="_on_pressed"]
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -806.0
+offset_right = 806.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="Sneak" type="Label" parent="Control/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -339.5
+offset_right = 255.0
+offset_bottom = -284.5
+grow_vertical = 2
+text = "Toogle Sneak"
+label_settings = SubResource("LabelSettings_neoxp")
+
+[node name="CheckBox" type="CheckBox" parent="Control/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 274.0
+offset_top = -332.0
+offset_right = 298.0
+offset_bottom = -308.0
+grow_vertical = 2
+scale = Vector2(2, 2)
+
+[node name="Sense" type="Label" parent="Control/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -239.5
+offset_right = 255.0
+offset_bottom = -184.5
+grow_vertical = 2
+text = "Mouse Sensitivity"
+label_settings = SubResource("LabelSettings_neoxp")
+
+[node name="sense" type="HSlider" parent="Control/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 355.0
+offset_top = -223.0
+offset_right = 603.0
+offset_bottom = -207.0
+grow_vertical = 2
+scale = Vector2(2, 2)
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 0.1
+tick_count = 1
+
+[node name="Color" type="Label" parent="Control/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -139.5
+offset_right = 337.0
+offset_bottom = -84.5
+grow_vertical = 2
+text = "Croshair Color"
+label_settings = SubResource("LabelSettings_neoxp")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Control/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 306.0
+offset_top = -147.0
+offset_right = 386.0
+offset_bottom = -67.0
+grow_vertical = 2
+flat = true
+color = Color(1, 1, 1, 1)
+script = ExtResource("2_neoxp")
+
+[node name="Reticle" type="CenterContainer" parent="Control/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 418.0
+offset_top = -107.0
+offset_right = 458.0
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7kwmf")
+
+[connection signal="pressed" from="back" to="back" method="_on_pressed"]
+[connection signal="color_changed" from="Control/Control/ColorPickerButton" to="Control/Control/Reticle" method="_on_color_picker_button_color_changed"]

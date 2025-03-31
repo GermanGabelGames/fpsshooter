@@ -1,0 +1,119 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbpswi43ia6tx"]
+
+[ext_resource type="Script" uid="uid://bavcbjmfixn3y" path="res://ui/scripts/gamer_tag.gd" id="1_i2kq1"]
+[ext_resource type="LabelSettings" uid="uid://cdke14yekaicf" path="res://ui/font.tres" id="2_qemc0"]
+[ext_resource type="Texture2D" uid="uid://5dibgh4ibf5e" path="res://textures/ui/back.png" id="3_mmtud"]
+[ext_resource type="Script" uid="uid://cbvlfsqulegvs" path="res://ui/scripts/back.gd" id="4_n50gc"]
+[ext_resource type="Script" uid="uid://dxjk2a2v5plku" path="res://ui/button.gd" id="6_n50gc"]
+
+[node name="login" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35885, 0.374682, 0.370832, 1)
+
+[node name="back" type="Button" parent="."]
+offset_left = 27.0
+offset_top = 27.0
+offset_right = 77.0
+offset_bottom = 77.0
+icon = ExtResource("3_mmtud")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_n50gc")
+
+[node name="GamerTag" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.5
+offset_top = -110.0
+offset_right = 161.5
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Gebe dein Gamertag ein"
+structured_text_bidi_override = 6
+script = ExtResource("1_i2kq1")
+
+[node name="tomutch" type="Label" parent="GamerTag"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = 7.5
+offset_right = 169.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Dein Gamertag darf nur 20 Zeichen Haben"
+label_settings = ExtResource("2_qemc0")
+vertical_alignment = 1
+
+[node name="toless" type="Label" parent="GamerTag"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = 7.5
+offset_right = 169.0
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Dein Gamertag darf nicht leer sein"
+label_settings = ExtResource("2_qemc0")
+vertical_alignment = 1
+
+[node name="Passwort" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.5
+offset_top = -34.0
+offset_right = 161.5
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Gebe dein Passwort ein"
+structured_text_bidi_override = 6
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.5
+offset_top = 42.0
+offset_right = 161.5
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Login"
+script = ExtResource("6_n50gc")
+
+[connection signal="pressed" from="back" to="back" method="_on_pressed"]
