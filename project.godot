@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="fpshooter"
-run/main_scene="uid://gcn0ldas1mqu"
+run/main_scene="uid://b1o7r8dxdkr8l"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
