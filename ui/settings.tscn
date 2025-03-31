@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0h40pmg4jxgy"]
+[gd_scene load_steps=5 format=3 uid="uid://c0h40pmg4jxgy"]
 
 [ext_resource type="Script" uid="uid://dwdojiy4t0g8e" path="res://player/scripts/reticle.gd" id="1_7kwmf"]
+[ext_resource type="Texture2D" uid="uid://5dibgh4ibf5e" path="res://textures/ui/back.png" id="2_feasd"]
+[ext_resource type="Script" uid="uid://wwge21b5ylwf" path="res://ui/code/croshair_color_picker.gd" id="2_neoxp"]
+[ext_resource type="Script" uid="uid://cbvlfsqulegvs" path="res://ui/code/back.gd" id="3_neoxp"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -10,6 +13,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35885, 0.374682, 0.370832, 1)
+
 [node name="Reticle" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -17,10 +29,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_right = 40.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7kwmf")
@@ -33,11 +43,25 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = 75.0
+offset_top = 33.0
 offset_right = 100.0
-offset_bottom = 275.0
+offset_bottom = 233.0
 grow_horizontal = 2
 grow_vertical = 2
+flat = true
 color = Color(1, 1, 1, 1)
+script = ExtResource("2_neoxp")
+
+[node name="settings" type="Button" parent="."]
+layout_mode = 1
+offset_left = 27.0
+offset_top = 27.0
+offset_right = 77.0
+offset_bottom = 77.0
+icon = ExtResource("2_feasd")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("3_neoxp")
 
 [connection signal="color_changed" from="ColorPickerButton" to="Reticle" method="_on_color_picker_button_color_changed"]
+[connection signal="pressed" from="settings" to="settings" method="_on_pressed"]

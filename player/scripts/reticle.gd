@@ -10,7 +10,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	queue_redraw()
+	pass
 
 func _draw():
 	draw_circle(Vector2(0,0),DOT_RADIUS,DOT_COLOR)
@@ -22,3 +22,4 @@ func _draw():
 
 func _on_color_picker_button_color_changed(color):
 	DOT_COLOR = color
+	queue_redraw()

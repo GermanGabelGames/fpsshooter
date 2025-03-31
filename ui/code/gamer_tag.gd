@@ -12,7 +12,7 @@ func _ready():
 	error_label.visible = false
 	toless.visible = false
 
-func _process(delta):
+func _process(_delta):
 	if text_edit.text.length() > MAX_CHARACTERS:
 		text_edit.text = text_edit.text.substr(0, MAX_CHARACTERS)
 
