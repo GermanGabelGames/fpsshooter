@@ -24,6 +24,7 @@ grow_vertical = 2
 color = Color(0.35885, 0.374682, 0.370832, 1)
 
 [node name="back" type="Button" parent="."]
+layout_mode = 0
 offset_left = 27.0
 offset_top = 27.0
 offset_right = 77.0
