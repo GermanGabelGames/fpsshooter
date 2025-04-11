@@ -2,7 +2,6 @@ extends CharacterBody3D
 
 
 @export var SPEED : float = 5.0
-@export var TOGGLE_CROUCH : bool = true
 @export var JUMP_VELOCITY : float = 3.0
 @export_range(5, 10, 0.1) var CROUCH_SPEED : float = 7.0
 @export var MOUSE_SENSITIVITY : float = 0.3
@@ -12,6 +11,7 @@ extends CharacterBody3D
 @export var ANIMATIONPLAYER : AnimationPlayer
 @export var CROUCH_SHAPECAST : Node3D
 
+var TOGGLE_CROUCH
 var _mouse_input : bool = false
 var _mouse_rotation : Vector3
 var _rotation_input : float
@@ -56,6 +56,7 @@ func _update_camera(delta):
 	_tilt_input = 0.0
 
 func _ready():
+	load_json()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	CROUCH_SHAPECAST.add_exception($".")
@@ -109,3 +110,12 @@ func crouching(state : bool):
 func _on_animation_player_animation_started(anim_name):
 	if anim_name == "crouch":
 		_is_crouching = !_is_crouching
+
+func load_json():
+	if FileAccess.file_exists("user://settings_data.json"):
+		var file = FileAccess.open("user://settings_data.json", FileAccess.READ)
+		var json_string = file.get_as_text()
+		file.close()
+		var result = JSON.parse_string(json_string)
+		if result and result.has("toggle_sneak"):
+			TOGGLE_CROUCH = result["toggle_sneak"]
