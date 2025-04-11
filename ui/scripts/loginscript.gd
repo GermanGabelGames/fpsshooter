@@ -1,16 +1,16 @@
 extends Control
 
-var username
-var passwort
-
-func _on_gamer_tag_text_changed():
-	var username = _on_passwort_text_changed()
-	print(username)
-
-
-func _on_passwort_text_changed():
-	pass # Replace with function body.
-
+@onready var user = $GamerTag
 
 func _on_button_pressed():
-	pass # Replace with function body.
+	request_user_data("test")
+	print("Client ID:", multiplayer.get_unique_id())
+
+
+@rpc("reliable")
+func request_user_data(username: String):
+	rpc_id( multiplayer.get_unique_id(), "get_user_data_rpc", username)
+
+@rpc("reliable")
+func receive_user_data(data: Dictionary):
+	print("Daten erhalten:", data)
