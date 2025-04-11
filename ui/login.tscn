@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbpswi43ia6tx"]
+[gd_scene load_steps=7 format=3 uid="uid://dbpswi43ia6tx"]
 
 [ext_resource type="Script" uid="uid://bavcbjmfixn3y" path="res://ui/scripts/gamer_tag.gd" id="1_i2kq1"]
+[ext_resource type="Script" uid="uid://cdg4p1bhpww5b" path="res://ui/scripts/loginscript.gd" id="1_mmtud"]
 [ext_resource type="LabelSettings" uid="uid://cdke14yekaicf" path="res://ui/font.tres" id="2_qemc0"]
 [ext_resource type="Texture2D" uid="uid://5dibgh4ibf5e" path="res://textures/ui/back.png" id="3_mmtud"]
 [ext_resource type="Script" uid="uid://cbvlfsqulegvs" path="res://ui/scripts/back.gd" id="4_n50gc"]
@@ -13,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_mmtud")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -118,3 +120,6 @@ text = "Login"
 script = ExtResource("6_n50gc")
 
 [connection signal="pressed" from="back" to="back" method="_on_pressed"]
+[connection signal="text_changed" from="GamerTag" to="." method="_on_gamer_tag_text_changed"]
+[connection signal="text_changed" from="Passwort" to="." method="_on_passwort_text_changed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
