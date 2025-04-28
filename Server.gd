@@ -3,7 +3,7 @@ extends Node
 var network = ENetMultiplayerPeer.new()
 var ip = "85.215.61.20"
 #var ip = "127.0.0.1"
-var port = 4242
+var port = 787
 
 func _ready():
 	ConnectToServer()
