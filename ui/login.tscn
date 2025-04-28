@@ -120,6 +120,4 @@ text = "Login"
 script = ExtResource("6_n50gc")
 
 [connection signal="pressed" from="back" to="back" method="_on_pressed"]
-[connection signal="text_changed" from="GamerTag" to="." method="_on_gamer_tag_text_changed"]
-[connection signal="text_changed" from="Passwort" to="." method="_on_passwort_text_changed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

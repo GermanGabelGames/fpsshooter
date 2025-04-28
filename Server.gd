@@ -2,7 +2,8 @@ extends Node
 
 var network = ENetMultiplayerPeer.new()
 var ip = "85.215.61.20"
-var port = 110
+#var ip = "127.0.0.1"
+var port = 4242
 
 func _ready():
 	ConnectToServer()
@@ -15,7 +16,6 @@ func ConnectToServer():
 		print("Verbindung erfolgreich gestartet!")
 		multiplayer.set_multiplayer_peer(network)
 		
-		# Verbindungssignale
 		network.connect("peer_connected", Callable(self, "_OnConnectionSucceeded"))
 		network.connect("peer_disconnected", Callable(self, "_OnConnectionFailed"))
 	else:
@@ -26,3 +26,5 @@ func _OnConnectionFailed():
 
 func _OnConnectionSucceeded():
 	print("Erfolgreich verbunden!")
+
+# Client: Methode zum Empfangen der Login-Daten

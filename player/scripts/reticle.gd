@@ -1,10 +1,11 @@
 extends CenterContainer
 
 @export var DOT_RADIUS : float = 1.0
-@export var DOT_COLOR : Color = Color.WHITE
+@export var DOT_COLOR := Color(1, 1, 1)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	load_json()
 	queue_redraw()
 
 
@@ -19,7 +20,13 @@ func _draw():
 	draw_line(Vector2(0,8),Vector2(0,16),DOT_COLOR,2)
 	draw_line(Vector2(0,-8),Vector2(0,-16),DOT_COLOR,2)
 
-
-func _on_color_picker_button_color_changed(color):
-	DOT_COLOR = color
-	queue_redraw()
+func load_json():
+	if FileAccess.file_exists("user://settings_data.json"):
+		var file = FileAccess.open("user://settings_data.json", FileAccess.READ)
+		var json_string = file.get_as_text()
+		file.close()
+		var result = JSON.parse_string(json_string)
+		if result:
+			if result.has("color_json"):
+				var c = result["color_json"]
+				DOT_COLOR = Color(c["r"], c["g"], c["b"], c["a"])
