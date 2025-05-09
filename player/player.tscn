@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkbxohswu3r76"]
+[gd_scene load_steps=13 format=3 uid="uid://bkbxohswu3r76"]
 
 [ext_resource type="Script" uid="uid://bqrpj3psdto3l" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://dwdojiy4t0g8e" path="res://player/scripts/reticle.gd" id="2_rkbax"]
@@ -7,6 +7,9 @@
 radius = 0.0005
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rkbax"]
+size = Vector3(0.05, 0.1, 0.7)
 
 [sub_resource type="Animation" id="Animation_rkbax"]
 length = 0.001
@@ -118,6 +121,43 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_oul6g"]
 
+[sub_resource type="Animation" id="Animation_g1dw6"]
+resource_name = "water_shot"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CammeraControler/Camera3D/Hand/MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2.03333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yw30f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CammeraControler/Camera3D/Hand/MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjkh3"]
+_data = {
+&"RESET": SubResource("Animation_yw30f"),
+&"water_shot": SubResource("Animation_g1dw6")
+}
+
 [node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATIONPLAYER", "CROUCH_SHAPECAST")]
 script = ExtResource("1_oul6g")
 CAMERA_CONTROLLER = NodePath("CammeraControler/Camera3D")
@@ -141,6 +181,15 @@ update_mode = 1
 blend_distance = 2.22
 max_distance = 7.6
 size = Vector3(100, 100, 100)
+
+[node name="RayCast3D" type="RayCast3D" parent="CammeraControler/Camera3D"]
+target_position = Vector3(0, 0, -200)
+
+[node name="Hand" type="Node3D" parent="CammeraControler/Camera3D"]
+transform = Transform3D(0.951057, 0, -0.309017, 0, 1, 0, 0.309017, 0, 0.951057, 0.4, -0.268, -0.425)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CammeraControler/Camera3D/Hand"]
+mesh = SubResource("BoxMesh_rkbax")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -175,5 +224,10 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_rkbax")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qjkh3")
+}
 
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
