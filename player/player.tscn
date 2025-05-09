@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkbxohswu3r76"]
+[gd_scene load_steps=11 format=3 uid="uid://bkbxohswu3r76"]
 
 [ext_resource type="Script" uid="uid://bqrpj3psdto3l" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://dwdojiy4t0g8e" path="res://player/scripts/reticle.gd" id="2_rkbax"]
+[ext_resource type="Script" uid="uid://dpphnelkqbn6r" path="res://player/helthbar.gd" id="3_yw30f"]
+[ext_resource type="Texture2D" uid="uid://oqns1836adnn" path="res://textures/ui/helthbar.png" id="4_qjkh3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 radius = 0.0005
@@ -175,5 +177,24 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_rkbax")
+
+[node name="helth" type="Container" parent="UserInterface"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -919.0
+offset_top = 440.0
+offset_right = -903.0
+offset_bottom = 456.0
+grow_vertical = 0
+scale = Vector2(30, 30)
+script = ExtResource("3_yw30f")
+
+[node name="helthbar" type="TextureProgressBar" parent="UserInterface/helth"]
+texture_filter = 1
+layout_mode = 2
+texture_progress = ExtResource("4_qjkh3")
 
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
