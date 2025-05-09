@@ -4,13 +4,13 @@ extends CharacterBody3D
 @export var SPEED : float = 5.0
 @export var JUMP_VELOCITY : float = 3.0
 @export_range(5, 10, 0.1) var CROUCH_SPEED : float = 7.0
-@export var MOUSE_SENSITIVITY : float = 0.3
 @export var TILT_LOWER_LIMIT := deg_to_rad(-90.0)
 @export var TILT_UPPER_LIMIT := deg_to_rad(90.0)
 @export var CAMERA_CONTROLLER : Camera3D
 @export var ANIMATIONPLAYER : AnimationPlayer
 @export var CROUCH_SHAPECAST : Node3D
 
+var MOUSE_SENSITIVITY
 var TOGGLE_CROUCH
 var _mouse_input : bool = false
 var _mouse_rotation : Vector3
@@ -119,3 +119,5 @@ func load_json():
 		var result = JSON.parse_string(json_string)
 		if result and result.has("toggle_sneak"):
 			TOGGLE_CROUCH = result["toggle_sneak"]
+		if result and result.has("mouse_sense"):
+			MOUSE_SENSITIVITY = result["mouse_sense"]

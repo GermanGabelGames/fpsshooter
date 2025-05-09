@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0h40pmg4jxgy"]
+[gd_scene load_steps=8 format=3 uid="uid://c0h40pmg4jxgy"]
 
 [ext_resource type="Script" uid="uid://dwdojiy4t0g8e" path="res://player/scripts/reticle.gd" id="1_7kwmf"]
 [ext_resource type="Texture2D" uid="uid://5dibgh4ibf5e" path="res://textures/ui/back.png" id="2_feasd"]
 [ext_resource type="Script" uid="uid://wwge21b5ylwf" path="res://ui/scripts/croshair_color_picker.gd" id="2_neoxp"]
 [ext_resource type="Script" uid="uid://cbvlfsqulegvs" path="res://ui/scripts/back.gd" id="3_neoxp"]
 [ext_resource type="Script" uid="uid://cm8vcexm2rw3l" path="res://ui/scripts/settings_data.gd" id="3_yl6pr"]
+[ext_resource type="Script" uid="uid://dxeslbl2vfw6h" path="res://ui/scripts/toogle_sneak.gd" id="4_evr87"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_neoxp"]
 font_size = 40
@@ -78,6 +79,7 @@ offset_right = 298.0
 offset_bottom = -308.0
 grow_vertical = 2
 scale = Vector2(2, 2)
+script = ExtResource("4_evr87")
 
 [node name="Sense" type="Label" parent="Control/Control"]
 layout_mode = 1
@@ -151,5 +153,7 @@ script = ExtResource("1_7kwmf")
 
 [connection signal="pressed" from="back" to="back" method="_on_pressed"]
 [connection signal="toggled" from="Control/Control/CheckBox" to="Control" method="_on_check_box_toggled"]
+[connection signal="drag_ended" from="Control/Control/sense" to="Control" method="_on_sense_drag_ended"]
+[connection signal="value_changed" from="Control/Control/sense" to="Control" method="_on_sense_value_changed"]
 [connection signal="color_changed" from="Control/Control/ColorPickerButton" to="Control" method="_on_color_picker_button_color_changed"]
 [connection signal="color_changed" from="Control/Control/ColorPickerButton" to="Control/Control/Reticle" method="_on_color_picker_button_color_changed"]
