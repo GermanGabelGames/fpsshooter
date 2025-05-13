@@ -10,6 +10,11 @@ extends CharacterBody3D
 @export var ANIMATIONPLAYER : AnimationPlayer
 @export var CROUCH_SHAPECAST : Node3D
 
+@onready var anim_player = $AnimationPlayer
+@onready var camera = $CammeraControler/Camera3D
+@onready var raycast = $CammeraControler/Camera3D/RayCast3D
+
+var damage = 10
 var MOUSE_SENSITIVITY
 var TOGGLE_CROUCH
 var _mouse_input : bool = false
@@ -62,6 +67,8 @@ func _ready():
 	CROUCH_SHAPECAST.add_exception($".")
 
 func _physics_process(delta):
+	
+	fire()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -121,3 +128,11 @@ func load_json():
 			TOGGLE_CROUCH = result["toggle_sneak"]
 		if result and result.has("mouse_sense"):
 			MOUSE_SENSITIVITY = result["mouse_sense"]
+
+func fire():
+	if Input.is_action_pressed("shoot"):
+		if not anim_player.is_playing():
+			print("fired a shot")
+		anim_player.play("AssoultFire")
+	else:
+		anim_player.stop()
