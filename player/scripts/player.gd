@@ -10,6 +10,8 @@ extends CharacterBody3D
 @export var ANIMATIONPLAYER : AnimationPlayer
 @export var CROUCH_SHAPECAST : Node3D
 
+@onready var healthbar = $CammeraControler/Camera3D/hud/health/healthbar
+
 var MOUSE_SENSITIVITY
 var TOGGLE_CROUCH
 var _mouse_input : bool = false
@@ -19,6 +21,7 @@ var _tilt_input : float
 var _player_rotation : Vector3
 var _camera_rotation : Vector3
 var _is_crouching : bool = false
+var temp_health
 
 func _input(event):
 	if event.is_action_pressed("exit"):
@@ -32,6 +35,15 @@ func _input(event):
 			crouching(false)
 		elif  CROUCH_SHAPECAST.is_colliding() == true:
 			uncrouch_check()
+	if Input.is_action_just_pressed("heal"):
+		healthbar.value = 100
+	if Input.is_action_just_pressed("damage"):
+		temp_health = healthbar.value
+		temp_health -= 10
+		if temp_health <= 0:
+			get_tree().change_scene_to_file("res://ui/tot.tscn")
+		healthbar.value = temp_health
+		
 
 func _unhandled_input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
@@ -57,7 +69,8 @@ func _update_camera(delta):
 
 func _ready():
 	load_json()
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 	
 	CROUCH_SHAPECAST.add_exception($".")
 
