@@ -13,6 +13,7 @@ extends CharacterBody3D
 @onready var anim_player = $AnimationPlayer
 @onready var camera = $CammeraControler/Camera3D
 @onready var raycast = $CammeraControler/Camera3D/RayCast3D
+@onready var healthbar = $CammeraControler/Camera3D/hud/health/healthbar
 
 var damage = 10
 var MOUSE_SENSITIVITY
@@ -37,6 +38,7 @@ func _input(event):
 			crouching(false)
 		elif  CROUCH_SHAPECAST.is_colliding() == true:
 			uncrouch_check()
+		
 
 func _unhandled_input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED

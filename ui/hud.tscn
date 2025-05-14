@@ -1,17 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqovq3e5uqnp1"]
+[gd_scene load_steps=9 format=3 uid="uid://cqovq3e5uqnp1"]
 
 [ext_resource type="Script" uid="uid://dwdojiy4t0g8e" path="res://player/scripts/reticle.gd" id="1_7ihmi"]
-[ext_resource type="Script" path="res://player/scripts/healthbar.gd" id="2_7ihmi"]
+[ext_resource type="Script" uid="uid://du0yo1qlbprtd" path="res://player/scripts/healthbar.gd" id="2_7ihmi"]
 [ext_resource type="Texture2D" uid="uid://oqns1836adnn" path="res://textures/ui/helthbar.png" id="3_1v5rv"]
+[ext_resource type="Script" uid="uid://dmm32trbt4rk4" path="res://ui/scripts/playerlist.gd" id="4_7ihmi"]
+[ext_resource type="Texture2D" uid="uid://b1fv318fhy8xn" path="res://textures/ui/player_icon_blue.png" id="5_en2x2"]
+[ext_resource type="Texture2D" uid="uid://dr50kdlns4yu" path="res://textures/ui/player_icon_red.png" id="6_1v5rv"]
+
+[sub_resource type="SystemFont" id="SystemFont_546lt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ihmi"]
+font = SubResource("SystemFont_546lt")
 
 [node name="hud" type="Control"]
-process_mode = 4
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="crosshair" type="Control" parent="."]
 layout_mode = 1
@@ -54,3 +62,124 @@ script = ExtResource("2_7ihmi")
 texture_filter = 1
 layout_mode = 2
 texture_progress = ExtResource("3_1v5rv")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 2
+offset_left = 313.0
+offset_top = 998.0
+offset_right = 353.0
+offset_bottom = 1026.0
+scale = Vector2(2, 2)
+text = "0"
+label_settings = SubResource("LabelSettings_7ihmi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerList" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -450.0
+offset_top = 10.0
+offset_right = 450.0
+offset_bottom = 210.0
+grow_horizontal = 2
+script = ExtResource("4_7ihmi")
+
+[node name="Team1" type="Control" parent="PlayerList"]
+layout_mode = 1
+anchors_preset = 0
+offset_top = 10.0
+offset_right = 100.0
+offset_bottom = 26.0
+scale = Vector2(4, 4)
+
+[node name="Player1" type="TextureRect" parent="PlayerList/Team1"]
+texture_filter = 1
+texture = ExtResource("5_en2x2")
+
+[node name="Player2" type="TextureRect" parent="PlayerList/Team1"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = -8.0
+offset_right = 37.0
+offset_bottom = 8.0
+grow_vertical = 2
+texture = ExtResource("5_en2x2")
+
+[node name="Player3" type="TextureRect" parent="PlayerList/Team1"]
+texture_filter = 1
+offset_left = 42.0
+offset_right = 58.0
+offset_bottom = 16.0
+texture = ExtResource("5_en2x2")
+
+[node name="Player4" type="TextureRect" parent="PlayerList/Team1"]
+texture_filter = 1
+offset_left = 63.0
+offset_right = 79.0
+offset_bottom = 16.0
+texture = ExtResource("5_en2x2")
+
+[node name="Player5" type="TextureRect" parent="PlayerList/Team1"]
+texture_filter = 1
+offset_left = 84.0
+offset_right = 100.0
+offset_bottom = 16.0
+texture = ExtResource("5_en2x2")
+
+[node name="Team2" type="Control" parent="PlayerList"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 50.0
+offset_top = 10.0
+offset_right = 150.0
+offset_bottom = 26.0
+grow_horizontal = 2
+scale = Vector2(4, 4)
+
+[node name="Player1" type="TextureRect" parent="PlayerList/Team2"]
+texture_filter = 1
+texture = ExtResource("6_1v5rv")
+
+[node name="Player2" type="TextureRect" parent="PlayerList/Team2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = -8.0
+offset_right = 37.0
+offset_bottom = 8.0
+grow_vertical = 2
+texture = ExtResource("6_1v5rv")
+
+[node name="Player3" type="TextureRect" parent="PlayerList/Team2"]
+texture_filter = 1
+offset_left = 42.0
+offset_right = 58.0
+offset_bottom = 16.0
+texture = ExtResource("6_1v5rv")
+
+[node name="Player4" type="TextureRect" parent="PlayerList/Team2"]
+texture_filter = 1
+offset_left = 63.0
+offset_right = 79.0
+offset_bottom = 16.0
+texture = ExtResource("6_1v5rv")
+
+[node name="Player5" type="TextureRect" parent="PlayerList/Team2"]
+texture_filter = 1
+offset_left = 84.0
+offset_right = 100.0
+offset_bottom = 16.0
+texture = ExtResource("6_1v5rv")
