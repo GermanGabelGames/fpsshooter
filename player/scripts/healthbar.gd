@@ -2,6 +2,7 @@ extends Container
 
 @onready var healthbar = $healthbar
 @onready var shieldtext = $"../Label"
+@onready var player1dead = $"../PlayerList/Team1/Player1/killed"
 
 var health = 100
 var shield = 0
@@ -27,6 +28,8 @@ func heal():
 		healthbar.value = 100
 		shieldtext.text = str("50")
 		health = 150
+	if health < 20:
+		player1dead.visible = true
 	else:
 		healthbar.value = health
 

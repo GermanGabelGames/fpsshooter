@@ -1,30 +1,35 @@
 extends Node
 
-var network = ENetMultiplayerPeer.new()
-var ip = "85.215.61.20"
-#var ip = "127.0.0.1"
-var port = 787
+const Player = preload("res://player/player.tscn")
+const PORT = 4242
+const maxplayers = 10
+
+var enet_pear = ENetMultiplayerPeer.new()
+var startcmd = OS.get_cmdline_args()
 
 func _ready():
-	ConnectToServer()
-
-func ConnectToServer():
-	print("Versuche, eine Verbindung zu ", ip, " auf Port ", port, " herzustellen.")
-	var result = network.create_client(ip, port)
-	
-	if result == OK:
-		print("Verbindung erfolgreich gestartet!")
-		multiplayer.set_multiplayer_peer(network)
-		
-		network.connect("peer_connected", Callable(self, "_OnConnectionSucceeded"))
-		network.connect("peer_disconnected", Callable(self, "_OnConnectionFailed"))
+	print(startcmd)
+	if DisplayServer.get_name() == "headless":
+		print("server")
+		serverstart()
 	else:
-		print("Fehler beim Starten der Verbindung: ", result)
+		print("client")
+		startclient()
 
-func _OnConnectionFailed():
-	print("Verbindung fehlgeschlagen oder Verbindung wurde getrennt.")
+func add_player(peer_id):
+	var player = Player.instantiate()
+	player.name = str(peer_id)
+	add_child(player)
+	print("player connected")
+	
+func serverstart():
+	enet_pear.create_server(PORT, maxplayers)
+	multiplayer.multiplayer_peer = enet_pear
+	multiplayer.peer_connected.connect(add_player)
+	print("Server started")
+	
+	add_player(multiplayer.get_unique_id())
 
-func _OnConnectionSucceeded():
-	print("Erfolgreich verbunden!")
-
-# Client: Methode zum Empfangen der Login-Daten
+func startclient():
+	enet_pear.create_client("localhost", PORT)
+	multiplayer.multiplayer_peer = enet_pear
