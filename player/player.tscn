@@ -179,6 +179,7 @@ mesh = SubResource("CapsuleMesh_4flbx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CammeraControler"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.195812)
 
 [node name="hud" parent="CammeraControler/Camera3D" instance=ExtResource("2_rkbax")]
 
