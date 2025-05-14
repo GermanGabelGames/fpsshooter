@@ -26,7 +26,12 @@ var _player_rotation : Vector3
 var _camera_rotation : Vector3
 var _is_crouching : bool = false
 
+func _enter_tree():
+	set_multiplayer_authority(str(name).to_int())
+	print(str(name).to_int())
+
 func _input(event):
+	if not is_multiplayer_authority(): return
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
 	if event.is_action_pressed("crouch") and TOGGLE_CROUCH == true:
@@ -41,6 +46,8 @@ func _input(event):
 		
 
 func _unhandled_input(event):
+	if not is_multiplayer_authority(): return
+	
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
 	if _mouse_input:
 		_rotation_input = -event.relative.x
@@ -64,11 +71,14 @@ func _update_camera(delta):
 
 func _ready():
 	load_json()
+	if not is_multiplayer_authority(): return
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	camera.current = true
 	
 	CROUCH_SHAPECAST.add_exception($".")
 
 func _physics_process(delta):
+	if not is_multiplayer_authority(): return
 	
 	fire()
 	# Add the gravity.

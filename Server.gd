@@ -21,14 +21,13 @@ func add_player(peer_id):
 	player.name = str(peer_id)
 	add_child(player)
 	print("player connected")
+	print(peer_id)
 	
 func serverstart():
 	enet_pear.create_server(PORT, maxplayers)
 	multiplayer.multiplayer_peer = enet_pear
 	multiplayer.peer_connected.connect(add_player)
 	print("Server started")
-	
-	add_player(multiplayer.get_unique_id())
 
 func startclient():
 	enet_pear.create_client("localhost", PORT)
