@@ -44,11 +44,6 @@ func _input(event):
 			crouching.rpc(false)
 		elif  CROUCH_SHAPECAST.is_colliding() == true:
 			uncrouch_check()
-	if event.is_action_pressed("shoot") and anim_player.current_animation != "AssoultFire":
-		play_shoots_effects.rpc()
-		if raycast.is_colliding():
-			var hit_player = raycast.get_collider()
-			hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
 
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
@@ -57,6 +52,9 @@ func _unhandled_input(event):
 	if _mouse_input:
 		_rotation_input = -event.relative.x
 		_tilt_input = -event.relative.y
+	
+	if event.is_action_pressed("shoot") and anim_player.current_animation != "AssoultFire":
+		play_shoots_effects.rpc()
 
 func _update_camera(delta):
 	_mouse_rotation.x += _tilt_input * delta
@@ -81,6 +79,13 @@ func _ready():
 	camera.current = true
 	
 	CROUCH_SHAPECAST.add_exception($".")
+	
+	if DisplayServer.get_name() == "headless":
+		pass
+	else:
+		print("spieler gruppe")
+		add_to_group("players")
+		print(get_groups())
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
@@ -148,9 +153,11 @@ func load_json():
 @rpc("any_peer")
 func receive_damage():
 	health -= 1
+	print(health)
 	if health <= 0:
+		print("tot")
 		health = 3
-		position = Vector3.ZERO
+		get_tree().quit()
 
 func healthcheck():
 	if health <= 0:
