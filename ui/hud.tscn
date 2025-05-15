@@ -129,6 +129,7 @@ texture = ExtResource("5_en2x2")
 
 [node name="killed" type="TextureRect" parent="PlayerList/Team1/Player2"]
 visible = false
+layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("6_q43x7")
@@ -143,6 +144,7 @@ texture = ExtResource("5_en2x2")
 
 [node name="killed" type="TextureRect" parent="PlayerList/Team1/Player3"]
 visible = false
+layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("6_q43x7")
@@ -157,6 +159,7 @@ texture = ExtResource("5_en2x2")
 
 [node name="killed" type="TextureRect" parent="PlayerList/Team1/Player4"]
 visible = false
+layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("6_q43x7")
@@ -171,6 +174,7 @@ texture = ExtResource("5_en2x2")
 
 [node name="killed" type="TextureRect" parent="PlayerList/Team1/Player5"]
 visible = false
+layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("6_q43x7")
@@ -194,6 +198,7 @@ texture = ExtResource("6_1v5rv")
 
 [node name="killed" type="TextureRect" parent="PlayerList/Team2/Player1"]
 visible = false
+layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("6_q43x7")
@@ -213,6 +218,7 @@ texture = ExtResource("6_1v5rv")
 
 [node name="killed" type="TextureRect" parent="PlayerList/Team2/Player2"]
 visible = false
+layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("6_q43x7")
@@ -227,6 +233,7 @@ texture = ExtResource("6_1v5rv")
 
 [node name="killed" type="TextureRect" parent="PlayerList/Team2/Player3"]
 visible = false
+layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("6_q43x7")
@@ -241,6 +248,7 @@ texture = ExtResource("6_1v5rv")
 
 [node name="killed" type="TextureRect" parent="PlayerList/Team2/Player4"]
 visible = false
+layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("6_q43x7")
@@ -255,6 +263,7 @@ texture = ExtResource("6_1v5rv")
 
 [node name="killed" type="TextureRect" parent="PlayerList/Team2/Player5"]
 visible = false
+layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("6_q43x7")

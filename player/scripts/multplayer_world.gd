@@ -22,11 +22,17 @@ func add_player(peer_id):
 	add_child(player)
 	print("player connected")
 	print(peer_id)
-	
+
+func remove_player(peer_id):
+	var player = get_node_or_null(str(peer_id))
+	if player:
+		player.queue_free()
+
 func serverstart():
 	enet_pear.create_server(PORT, maxplayers)
 	multiplayer.multiplayer_peer = enet_pear
 	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_disconnected.connect(remove_player)
 	print("Server started")
 
 func startclient():

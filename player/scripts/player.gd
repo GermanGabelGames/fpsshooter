@@ -12,8 +12,8 @@ extends CharacterBody3D
 
 @onready var anim_player = $AnimationPlayer
 @onready var camera = $CammeraControler/Camera3D
-@onready var raycast = $CammeraControler/Camera3D/RayCast3D
 @onready var healthbar = $CammeraControler/Camera3D/hud/health/healthbar
+@onready var raycast = $CammeraControler/Camera3D/RayCast3D
 
 var damage = 10
 var MOUSE_SENSITIVITY
@@ -25,6 +25,7 @@ var _tilt_input : float
 var _player_rotation : Vector3
 var _camera_rotation : Vector3
 var _is_crouching : bool = false
+var health = 3
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
@@ -37,13 +38,17 @@ func _input(event):
 	if event.is_action_pressed("crouch") and TOGGLE_CROUCH == true:
 		toggle_crouch()
 	if event.is_action_pressed("crouch") and _is_crouching == false and TOGGLE_CROUCH == false:
-		crouching(true)
+		crouching.rpc(true)
 	if event.is_action_released("crouch") and TOGGLE_CROUCH == false:
 		if CROUCH_SHAPECAST.is_colliding() == false:
-			crouching(false)
+			crouching.rpc(false)
 		elif  CROUCH_SHAPECAST.is_colliding() == true:
 			uncrouch_check()
-		
+	if event.is_action_pressed("shoot") and anim_player.current_animation != "AssoultFire":
+		play_shoots_effects.rpc()
+		if raycast.is_colliding():
+			var hit_player = raycast.get_collider()
+			hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
 
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
@@ -79,8 +84,6 @@ func _ready():
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
-	
-	fire()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -106,17 +109,18 @@ func _physics_process(delta):
 
 func toggle_crouch():
 	if _is_crouching == true and CROUCH_SHAPECAST.is_colliding() == false:
-		crouching(false)
+		crouching.rpc(false)
 	elif _is_crouching == false:
-		crouching(true)
+		crouching.rpc(true)
 
 func uncrouch_check():
 	if CROUCH_SHAPECAST.is_colliding() == false:
-		crouching(false)
+		crouching.rpc(false)
 	if CROUCH_SHAPECAST.is_colliding() == true:
 		await get_tree().create_timer(0.1).timeout
 		uncrouch_check()
 
+@rpc("call_local")
 func crouching(state : bool):
 	match state:
 		true:
@@ -141,10 +145,19 @@ func load_json():
 		if result and result.has("mouse_sense"):
 			MOUSE_SENSITIVITY = result["mouse_sense"]
 
-func fire():
-	if Input.is_action_pressed("shoot"):
-		if not anim_player.is_playing():
-			print("fired a shot")
-		anim_player.play("AssoultFire")
-	else:
-		anim_player.stop()
+@rpc("any_peer")
+func receive_damage():
+	health -= 1
+	if health <= 0:
+		health = 3
+		position = Vector3.ZERO
+
+func healthcheck():
+	if health <= 0:
+		health = 100
+		position = Vector3.ZERO
+
+@rpc("call_local")
+func play_shoots_effects():
+	anim_player.stop()
+	anim_player.play("AssoultFire")
