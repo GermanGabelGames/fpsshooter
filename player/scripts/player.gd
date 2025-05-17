@@ -12,8 +12,9 @@ extends CharacterBody3D
 
 @onready var anim_player = $AnimationPlayer
 @onready var camera = $CammeraControler/Camera3D
-@onready var healthbar = $CammeraControler/Camera3D/hud/health/healthbar
 @onready var raycast = $CammeraControler/Camera3D/RayCast3D
+@onready var escapemenu = $CammeraControler/Camera3D/hud/escape_menu
+@onready var team_pick_menu = $CammeraControler/Camera3D/hud/team_pick
 
 var damage = 10
 var MOUSE_SENSITIVITY
@@ -25,7 +26,9 @@ var _tilt_input : float
 var _player_rotation : Vector3
 var _camera_rotation : Vector3
 var _is_crouching : bool = false
-var health = 3
+var health = 100
+var temp_health
+var team
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
@@ -34,7 +37,8 @@ func _enter_tree():
 func _input(event):
 	if not is_multiplayer_authority(): return
 	if event.is_action_pressed("exit"):
-		get_tree().quit()
+		escapemenu.show()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if event.is_action_pressed("crouch") and TOGGLE_CROUCH == true:
 		toggle_crouch()
 	if event.is_action_pressed("crouch") and _is_crouching == false and TOGGLE_CROUCH == false:
@@ -73,9 +77,8 @@ func _update_camera(delta):
 	_tilt_input = 0.0
 
 func _ready():
-	load_json()
 	if not is_multiplayer_authority(): return
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	load_json()
 	camera.current = true
 	
 	CROUCH_SHAPECAST.add_exception($".")
@@ -152,11 +155,10 @@ func load_json():
 
 @rpc("any_peer")
 func receive_damage():
-	health -= 1
+	health -= 40
 	print(health)
 	if health <= 0:
 		print("tot")
-		health = 3
 		get_tree().quit()
 
 func healthcheck():
@@ -168,3 +170,15 @@ func healthcheck():
 func play_shoots_effects():
 	anim_player.stop()
 	anim_player.play("AssoultFire")
+
+
+func _on_team_1_pressed():
+	team = true
+	team_pick_menu.hide()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+
+func _on_team_2_pressed():
+	team = false
+	team_pick_menu.hide()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

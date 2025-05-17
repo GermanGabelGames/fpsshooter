@@ -8,11 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://dr50kdlns4yu" path="res://textures/ui/player_icon_red.png" id="6_1v5rv"]
 [ext_resource type="Texture2D" uid="uid://hhhm3f5s87de" path="res://textures/ui/killed.png" id="6_q43x7"]
 
-[sub_resource type="SystemFont" id="SystemFont_546lt"]
+[sub_resource type="SystemFont" id="SystemFont_q43x7"]
 subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_7ihmi"]
-font = SubResource("SystemFont_546lt")
+font = SubResource("SystemFont_q43x7")
 
 [sub_resource type="LabelSettings" id="LabelSettings_1v5rv"]
 font_size = 38

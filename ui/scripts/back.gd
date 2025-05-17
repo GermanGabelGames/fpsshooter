@@ -1,11 +1,16 @@
 extends Button
 
+@onready var settings = $".."
+@onready var escape_menu = $"../../escape_menu"
+@onready var playerbar = $"../../PlayerList"
+
 func _ready():
 	pass
 
 func _process(_delta):
 	pass
 
-
 func _on_pressed():
-	get_tree().change_scene_to_file("res://ui/menu.tscn")
+	settings.hide()
+	escape_menu.show()
+	playerbar.show()

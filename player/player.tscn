@@ -1,13 +1,39 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkbxohswu3r76"]
+[gd_scene load_steps=32 format=3 uid="uid://bkbxohswu3r76"]
 
 [ext_resource type="Script" uid="uid://bqrpj3psdto3l" path="res://player/scripts/player.gd" id="1_oul6g"]
-[ext_resource type="PackedScene" uid="uid://cqovq3e5uqnp1" path="res://ui/hud.tscn" id="2_rkbax"]
 [ext_resource type="Script" uid="uid://bijit4ithoeim" path="res://player/scripts/damage.gd" id="3_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://6vcv7f3852qj" path="res://textures/ui/settings.png" id="3_g6k8r"]
+[ext_resource type="Script" uid="uid://bkhrqa6vxraet" path="res://ui/scripts/settings.gd" id="4_boad6"]
+[ext_resource type="Script" uid="uid://du0yo1qlbprtd" path="res://player/scripts/healthbar.gd" id="5_boad6"]
+[ext_resource type="Script" uid="uid://wr8nhgr7xgb4" path="res://ui/scripts/escape_menu_buttons.gd" id="5_rgyib"]
+[ext_resource type="Texture2D" uid="uid://oqns1836adnn" path="res://textures/ui/helthbar.png" id="6_rgyib"]
+[ext_resource type="Texture2D" uid="uid://5dibgh4ibf5e" path="res://textures/ui/back.png" id="7_yllr7"]
+[ext_resource type="Script" uid="uid://cbvlfsqulegvs" path="res://ui/scripts/back.gd" id="8_kb6p2"]
+[ext_resource type="Script" uid="uid://cm8vcexm2rw3l" path="res://ui/scripts/settings_data.gd" id="9_wodsf"]
+[ext_resource type="Script" uid="uid://dxeslbl2vfw6h" path="res://ui/scripts/toogle_sneak.gd" id="10_32hag"]
+[ext_resource type="Script" uid="uid://wwge21b5ylwf" path="res://ui/scripts/croshair_color_picker.gd" id="11_tqiix"]
+[ext_resource type="Script" uid="uid://dwdojiy4t0g8e" path="res://player/scripts/reticle.gd" id="12_e7oew"]
+[ext_resource type="Script" uid="uid://dmm32trbt4rk4" path="res://ui/scripts/playerlist.gd" id="13_tqiix"]
+[ext_resource type="Texture2D" uid="uid://b1fv318fhy8xn" path="res://textures/ui/player_icon_blue.png" id="14_e7oew"]
+[ext_resource type="Texture2D" uid="uid://hhhm3f5s87de" path="res://textures/ui/killed.png" id="15_c35mf"]
+[ext_resource type="Texture2D" uid="uid://dr50kdlns4yu" path="res://textures/ui/player_icon_red.png" id="16_65viv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 radius = 0.0005
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+
+[sub_resource type="SystemFont" id="SystemFont_546lt"]
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_hg6s5"]
+font = SubResource("SystemFont_546lt")
+
+[sub_resource type="LabelSettings" id="LabelSettings_c35mf"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_x7c3f"]
+font_size = 38
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkbax"]
 size = Vector3(0.05, 0.1, 0.7)
@@ -184,8 +210,515 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 [node name="Camera3D" type="Camera3D" parent="CammeraControler"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.195812)
 
-[node name="hud" parent="CammeraControler/Camera3D" instance=ExtResource("2_rkbax")]
-metadata/_edit_use_anchors_ = true
+[node name="crosshair" type="Control" parent="CammeraControler/Camera3D"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Reticle" type="CenterContainer" parent="CammeraControler/Camera3D/crosshair"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_e7oew")
+
+[node name="hud" type="Control" parent="CammeraControler/Camera3D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="escape_menu" type="Control" parent="CammeraControler/Camera3D/hud"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="settings" type="Button" parent="CammeraControler/Camera3D/hud/escape_menu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 859.0
+offset_top = -489.0
+offset_right = 909.0
+offset_bottom = -439.0
+grow_horizontal = 0
+icon = ExtResource("3_g6k8r")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_boad6")
+
+[node name="mittle_buttons" type="Control" parent="CammeraControler/Camera3D/hud/escape_menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_rgyib")
+
+[node name="play" type="Button" parent="CammeraControler/Camera3D/hud/escape_menu/mittle_buttons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -63.0
+offset_right = 125.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+
+[node name="quit" type="Button" parent="CammeraControler/Camera3D/hud/escape_menu/mittle_buttons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = 15.0
+offset_right = 125.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+
+[node name="healthbar" type="Control" parent="CammeraControler/Camera3D/hud"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="health" type="Container" parent="CammeraControler/Camera3D/hud/healthbar"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 965.0
+offset_right = 54.0
+offset_bottom = 1005.0
+grow_vertical = 0
+scale = Vector2(20, 20)
+script = ExtResource("5_boad6")
+
+[node name="healthbar" type="TextureProgressBar" parent="CammeraControler/Camera3D/hud/healthbar/health"]
+texture_filter = 1
+layout_mode = 2
+texture_progress = ExtResource("6_rgyib")
+
+[node name="Label" type="Label" parent="CammeraControler/Camera3D/hud/healthbar"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 313.0
+offset_top = 998.0
+offset_right = 353.0
+offset_bottom = 1026.0
+scale = Vector2(2, 2)
+text = "0"
+label_settings = SubResource("LabelSettings_hg6s5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="settings" type="Control" parent="CammeraControler/Camera3D/hud"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 268.0
+offset_top = 200.0
+offset_right = 308.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="back" type="Button" parent="CammeraControler/Camera3D/hud/settings"]
+layout_mode = 1
+offset_left = -1073.0
+offset_top = -615.0
+offset_right = -1023.0
+offset_bottom = -565.0
+icon = ExtResource("7_yllr7")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("8_kb6p2")
+
+[node name="Control" type="Control" parent="CammeraControler/Camera3D/hud/settings"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -872.0
+offset_top = -146.0
+offset_right = 740.0
+offset_bottom = -146.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_wodsf")
+
+[node name="Control" type="Control" parent="CammeraControler/Camera3D/hud/settings/Control"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="Sneak" type="Label" parent="CammeraControler/Camera3D/hud/settings/Control/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -339.5
+offset_right = 255.0
+offset_bottom = -284.5
+grow_vertical = 2
+text = "Toogle Sneak"
+label_settings = SubResource("LabelSettings_c35mf")
+
+[node name="CheckBox" type="CheckBox" parent="CammeraControler/Camera3D/hud/settings/Control/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 274.0
+offset_top = -332.0
+offset_right = 298.0
+offset_bottom = -308.0
+grow_vertical = 2
+scale = Vector2(2, 2)
+script = ExtResource("10_32hag")
+
+[node name="Sense" type="Label" parent="CammeraControler/Camera3D/hud/settings/Control/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -239.5
+offset_right = 255.0
+offset_bottom = -184.5
+grow_vertical = 2
+text = "Mouse Sensitivity"
+label_settings = SubResource("LabelSettings_c35mf")
+
+[node name="sense" type="HSlider" parent="CammeraControler/Camera3D/hud/settings/Control/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 355.0
+offset_top = -223.0
+offset_right = 603.0
+offset_bottom = -207.0
+grow_vertical = 2
+scale = Vector2(2, 2)
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 0.1
+tick_count = 1
+
+[node name="Color" type="Label" parent="CammeraControler/Camera3D/hud/settings/Control/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -139.5
+offset_right = 337.0
+offset_bottom = -84.5
+grow_vertical = 2
+text = "Croshair Color"
+label_settings = SubResource("LabelSettings_c35mf")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CammeraControler/Camera3D/hud/settings/Control/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 306.0
+offset_top = -147.0
+offset_right = 386.0
+offset_bottom = -67.0
+grow_vertical = 2
+flat = true
+color = Color(1, 1, 1, 1)
+script = ExtResource("11_tqiix")
+
+[node name="PlayerList" type="Control" parent="CammeraControler/Camera3D/hud"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -450.0
+offset_right = 450.0
+offset_bottom = 200.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("13_tqiix")
+
+[node name="Team1" type="Control" parent="CammeraControler/Camera3D/hud/PlayerList"]
+layout_mode = 1
+anchors_preset = 0
+offset_top = 10.0
+offset_right = 100.0
+offset_bottom = 26.0
+scale = Vector2(4, 4)
+
+[node name="Player1" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team1"]
+texture_filter = 1
+layout_mode = 0
+texture = ExtResource("14_e7oew")
+
+[node name="killed" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team1/Player1"]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("15_c35mf")
+
+[node name="Player2" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team1"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = -8.0
+offset_right = 37.0
+offset_bottom = 8.0
+grow_vertical = 2
+texture = ExtResource("14_e7oew")
+
+[node name="killed" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team1/Player2"]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("15_c35mf")
+
+[node name="Player3" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team1"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 42.0
+offset_right = 58.0
+offset_bottom = 16.0
+texture = ExtResource("14_e7oew")
+
+[node name="killed" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team1/Player3"]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("15_c35mf")
+
+[node name="Player4" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team1"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 63.0
+offset_right = 79.0
+offset_bottom = 16.0
+texture = ExtResource("14_e7oew")
+
+[node name="killed" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team1/Player4"]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("15_c35mf")
+
+[node name="Player5" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team1"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 84.0
+offset_right = 100.0
+offset_bottom = 16.0
+texture = ExtResource("14_e7oew")
+
+[node name="killed" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team1/Player5"]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("15_c35mf")
+
+[node name="Team2" type="Control" parent="CammeraControler/Camera3D/hud/PlayerList"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 50.0
+offset_top = 10.0
+offset_right = 150.0
+offset_bottom = 26.0
+grow_horizontal = 2
+scale = Vector2(4, 4)
+
+[node name="Player1" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team2"]
+texture_filter = 1
+layout_mode = 0
+texture = ExtResource("16_65viv")
+
+[node name="killed" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team2/Player1"]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("15_c35mf")
+
+[node name="Player2" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = -8.0
+offset_right = 37.0
+offset_bottom = 8.0
+grow_vertical = 2
+texture = ExtResource("16_65viv")
+
+[node name="killed" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team2/Player2"]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("15_c35mf")
+
+[node name="Player3" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 42.0
+offset_right = 58.0
+offset_bottom = 16.0
+texture = ExtResource("16_65viv")
+
+[node name="killed" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team2/Player3"]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("15_c35mf")
+
+[node name="Player4" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 63.0
+offset_right = 79.0
+offset_bottom = 16.0
+texture = ExtResource("16_65viv")
+
+[node name="killed" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team2/Player4"]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("15_c35mf")
+
+[node name="Player5" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 84.0
+offset_right = 100.0
+offset_bottom = 16.0
+texture = ExtResource("16_65viv")
+
+[node name="killed" type="TextureRect" parent="CammeraControler/Camera3D/hud/PlayerList/Team2/Player5"]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("15_c35mf")
+
+[node name="timer" type="Label" parent="CammeraControler/Camera3D/hud/PlayerList"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 16.0
+offset_right = 50.0
+offset_bottom = 69.0
+grow_horizontal = 2
+text = "0:00"
+label_settings = SubResource("LabelSettings_x7c3f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="team_pick" type="Control" parent="CammeraControler/Camera3D/hud"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(20, 20)
+
+[node name="team1" type="TextureButton" parent="CammeraControler/Camera3D/hud/team_pick"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -9.0
+offset_right = -5.0
+offset_bottom = 7.0
+grow_vertical = 2
+texture_normal = ExtResource("14_e7oew")
+
+[node name="team2" type="TextureButton" parent="CammeraControler/Camera3D/hud/team_pick"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -9.0
+offset_right = 21.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("16_65viv")
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="CammeraControler/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.670651, 0)
@@ -225,4 +758,17 @@ script = ExtResource("3_g1dw6")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox"]
 shape = SubResource("CapsuleShape3D_rkbax")
 
+[connection signal="pressed" from="CammeraControler/Camera3D/hud/escape_menu/settings" to="CammeraControler/Camera3D/hud/escape_menu/settings" method="_on_pressed"]
+[connection signal="pressed" from="CammeraControler/Camera3D/hud/escape_menu/mittle_buttons/play" to="CammeraControler/Camera3D/hud/escape_menu/mittle_buttons" method="_on_play_pressed"]
+[connection signal="pressed" from="CammeraControler/Camera3D/hud/escape_menu/mittle_buttons/quit" to="CammeraControler/Camera3D/hud/escape_menu/mittle_buttons" method="_on_quit_pressed"]
+[connection signal="pressed" from="CammeraControler/Camera3D/hud/settings/back" to="CammeraControler/Camera3D/crosshair/Reticle" method="_on_back_pressed"]
+[connection signal="pressed" from="CammeraControler/Camera3D/hud/settings/back" to="CammeraControler/Camera3D/hud/settings/back" method="_on_pressed"]
+[connection signal="toggled" from="CammeraControler/Camera3D/hud/settings/Control/Control/CheckBox" to="CammeraControler/Camera3D/hud/settings/Control" method="_on_check_box_toggled"]
+[connection signal="drag_ended" from="CammeraControler/Camera3D/hud/settings/Control/Control/sense" to="CammeraControler/Camera3D/hud/settings/Control" method="_on_sense_drag_ended"]
+[connection signal="value_changed" from="CammeraControler/Camera3D/hud/settings/Control/Control/sense" to="CammeraControler/Camera3D/hud/settings/Control" method="_on_sense_value_changed"]
+[connection signal="color_changed" from="CammeraControler/Camera3D/hud/settings/Control/Control/ColorPickerButton" to="CammeraControler/Camera3D/hud/settings/back" method="_on_color_picker_button_color_changed"]
+[connection signal="color_changed" from="CammeraControler/Camera3D/hud/settings/Control/Control/ColorPickerButton" to="CammeraControler/Camera3D/hud/settings/Control" method="_on_color_picker_button_color_changed"]
+[connection signal="pressed" from="CammeraControler/Camera3D/hud/team_pick/team1" to="." method="_on_team_1_pressed"]
+[connection signal="pressed" from="CammeraControler/Camera3D/hud/team_pick/team2" to="." method="_on_team_2_pressed"]
+[connection signal="pressed" from="CammeraControler/Camera3D/hud/team_pick/team2" to="CammeraControler/Camera3D/hud/team_pick" method="_on_team_2_pressed"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]

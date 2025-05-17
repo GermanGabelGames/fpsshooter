@@ -30,3 +30,8 @@ func load_json():
 			if result.has("color_json"):
 				var c = result["color_json"]
 				DOT_COLOR = Color(c["r"], c["g"], c["b"], c["a"])
+
+
+func _on_back_pressed():
+	load_json()
+	queue_redraw()
