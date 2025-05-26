@@ -1,15 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://gcn0ldas1mqu"]
+[gd_scene load_steps=4 format=3 uid="uid://gcn0ldas1mqu"]
 
 [ext_resource type="Script" uid="uid://ddfa7mitw4lq1" path="res://player/scripts/multplayer_world.gd" id="1_sy5k4"]
 [ext_resource type="Texture2D" uid="uid://c2quj7efoj6s0" path="res://textures/map/Green/texture_09.png" id="2_j2q8x"]
-[ext_resource type="Texture2D" uid="uid://bu21g5532cjy1" path="res://textures/map/Orange/texture_09.png" id="3_112p8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_112p8"]
 albedo_texture = ExtResource("2_j2q8x")
-uv1_triplanar = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2u21"]
-albedo_texture = ExtResource("3_112p8")
 uv1_triplanar = true
 
 [node name="Node3D" type="Node3D"]
@@ -18,23 +13,88 @@ script = ExtResource("1_sy5k4")
 [node name="Map" type="Node3D" parent="."]
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Map/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(100, 0.1, 100)
 material = SubResource("StandardMaterial3D_112p8")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Map/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.51801, 0)
-size = Vector3(3, 3, 1)
-material = SubResource("StandardMaterial3D_e2u21")
+[node name="Haus_1" type="CSGBox3D" parent="Map/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 4, 20)
+size = Vector3(20, 10, 35)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Map/CSGCombiner3D/CSGBox3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/CSGCombiner3D/Haus_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.336, -3.5, -17)
 operation = 2
-size = Vector3(1, 2, 2)
-material = SubResource("StandardMaterial3D_e2u21")
+size = Vector3(2, 3, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/CSGCombiner3D/Haus_1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.43793, -3.5, 12)
+operation = 2
+size = Vector3(2, 3, 1.12415)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map/CSGCombiner3D/Haus_1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -1.5, -0.5)
+operation = 2
+size = Vector3(33, 9, 18)
+
+[node name="Block_1" type="CSGBox3D" parent="Map/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1075, 0.5, 11.2124)
+size = Vector3(3, 3, 3)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/CSGCombiner3D/Block_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 1)
+operation = 2
+size = Vector3(1, 2, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/CSGCombiner3D/Block_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+operation = 2
+size = Vector3(1, 2, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/CSGCombiner3D/Block_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+operation = 2
+size = Vector3(1, 2, 1)
+
+[node name="Block_3" type="CSGBox3D" parent="Map/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.6839, 0.5, 21.1507)
+size = Vector3(3, 3, 3)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/CSGCombiner3D/Block_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 1)
+operation = 2
+size = Vector3(1, 2, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/CSGCombiner3D/Block_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+operation = 2
+size = Vector3(1, 2, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/CSGCombiner3D/Block_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+operation = 2
+size = Vector3(1, 2, 1)
+
+[node name="Block_2" type="CSGBox3D" parent="Map/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.77715, 0.5, -31.1079)
+size = Vector3(3, 3, 3)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/CSGCombiner3D/Block_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 1)
+operation = 2
+size = Vector3(1, 2, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/CSGCombiner3D/Block_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+operation = 2
+size = Vector3(1, 2, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/CSGCombiner3D/Block_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+operation = 2
+size = Vector3(1, 2, 1)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://bkbxohswu3r76")
