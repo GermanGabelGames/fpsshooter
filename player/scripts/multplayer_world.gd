@@ -36,7 +36,7 @@ func serverstart():
 	print("Server started")
 
 func startclient():
-	enet_pear.create_client("localhost", PORT)
+	enet_pear.create_client("85.215.61.20", PORT)
 	multiplayer.multiplayer_peer = enet_pear
 
 func _on_multiplayer_spawner_spawned(node):
