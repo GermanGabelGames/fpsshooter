@@ -204,6 +204,12 @@ shape = SubResource("CapsuleShape3D_sh265")
 mesh = SubResource("CapsuleMesh_4flbx")
 skeleton = NodePath("../CollisionShape3D")
 
+[node name="username_label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26225, 0)
+billboard = 1
+text = "Player"
+uppercase = true
+
 [node name="CammeraControler" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
@@ -680,6 +686,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="team_pick" type="Control" parent="CammeraControler/Camera3D/hud"]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8

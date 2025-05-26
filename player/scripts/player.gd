@@ -15,6 +15,7 @@ extends CharacterBody3D
 @onready var raycast = $CammeraControler/Camera3D/RayCast3D
 @onready var escapemenu = $CammeraControler/Camera3D/hud/escape_menu
 @onready var team_pick_menu = $CammeraControler/Camera3D/hud/team_pick
+@onready var username_label = $username_label
 
 var damage = 10
 var MOUSE_SENSITIVITY
@@ -86,9 +87,7 @@ func _ready():
 	if DisplayServer.get_name() == "headless":
 		pass
 	else:
-		print("spieler gruppe")
-		add_to_group("players")
-		print(get_groups())
+		team_pick_menu.show()
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return

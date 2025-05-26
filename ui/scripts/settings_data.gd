@@ -36,11 +36,11 @@ func load_json():
 		file.close()
 		var result = JSON.parse_string(json_string)
 		if result and result.has("toggle_sneak"):
-			toggle_sneak = result["toggle_sneak"]
+			Global.MOUSE_SENSITIVITY = result["toggle_sneak"]
 		if result and result.has("color"):
-			color_load = result["color"]
+			Global.DOT_COLOR = result["color"]
 		if result and result.has("mouse_sense"):
-			mouse_sense = result["mouse_sense"]
+			Global.MOUSE_SENSITIVITY = result["mouse_sense"]
 
 func _on_color_picker_button_color_changed(color):
 	color_json = color
