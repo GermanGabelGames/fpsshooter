@@ -4,7 +4,7 @@ var toggle_sneak
 
 func _ready():
 	load_json()
-	$".".toggle_mode = toggle_sneak
+	#$".".toggle_mode = toggle_sneak
 
 func _process(delta):
 	pass

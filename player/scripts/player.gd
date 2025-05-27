@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 
 @export var SPEED : float = 5.0
-@export var JUMP_VELOCITY : float = 3.0
+@export var JUMP_VELOCITY : float = 5.0
 @export_range(5, 10, 0.1) var CROUCH_SPEED : float = 7.0
 @export var TILT_LOWER_LIMIT := deg_to_rad(-90.0)
 @export var TILT_UPPER_LIMIT := deg_to_rad(90.0)
