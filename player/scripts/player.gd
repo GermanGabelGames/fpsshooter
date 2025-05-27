@@ -18,7 +18,7 @@ extends CharacterBody3D
 @onready var username_label = $username_label
 
 var damage = 10
-var MOUSE_SENSITIVITY
+var MOUSE_SENSITIVITY = 0.01
 var TOGGLE_CROUCH
 var _mouse_input : bool = false
 var _mouse_rotation : Vector3

@@ -1,6 +1,6 @@
 extends Node
 
-var MOUSE_SENSITIVITY = 1
+var MOUSE_SENSITIVITY = 0.1
 var TOGGLE_CROUCH = false
 var DOT_COLOR := Color(1, 1, 1)
 var username
