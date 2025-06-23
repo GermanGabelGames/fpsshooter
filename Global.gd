@@ -3,7 +3,8 @@ extends Node
 var MOUSE_SENSITIVITY = 0.1
 var TOGGLE_CROUCH = false
 var DOT_COLOR := Color(1, 1, 1)
-var username
+var username = "Player"
+var team
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

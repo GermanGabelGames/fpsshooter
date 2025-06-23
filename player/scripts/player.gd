@@ -29,7 +29,6 @@ var _camera_rotation : Vector3
 var _is_crouching : bool = false
 var health = 100
 var temp_health
-var team
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
@@ -172,12 +171,12 @@ func play_shoots_effects():
 
 
 func _on_team_1_pressed():
-	team = true
+	Global.team = 1
 	team_pick_menu.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _on_team_2_pressed():
-	team = false
+	Global.team = 2
 	team_pick_menu.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

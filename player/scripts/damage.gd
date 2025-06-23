@@ -14,6 +14,7 @@ func _unhandled_input(event):
 			print("check")
 			print(hit_player.get_multiplayer_authority())
 			hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
+			print("40 Damage von ", get_multiplayer_authority(), " an ", hit_player.get_multiplayer_authority())
 
 @rpc("any_peer")
 func receive_damage():
