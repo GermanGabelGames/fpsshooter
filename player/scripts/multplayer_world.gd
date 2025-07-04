@@ -2,7 +2,7 @@ extends Node3D
 
 const Player = preload("res://player/player.tscn")
 const PORT = 4242
-const maxplayers = 10
+const maxplayers = 100
 
 var enet_pear = ENetMultiplayerPeer.new()
 var startcmd = OS.get_cmdline_args()
@@ -37,7 +37,7 @@ func serverstart():
 
 func startclient():
 	#enet_pear.create_client("85.215.61.20", PORT)
-	enet_pear.create_client("localhost", PORT)
+	enet_pear.create_client("10.20.122.23", PORT)
 	multiplayer.multiplayer_peer = enet_pear
 
 func _on_multiplayer_spawner_spawned(node):
